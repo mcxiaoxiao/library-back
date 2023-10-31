@@ -40,6 +40,8 @@ type TakeEntity{
     borrowedtime:Int
     borrowedddl:String
     borroweddate:String
+    bookname:String
+    isreturned:Boolean
 }
 
 
