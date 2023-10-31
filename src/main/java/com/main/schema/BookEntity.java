@@ -39,6 +39,9 @@ public class BookEntity {
     @Basic
     @Column(name = "libname")
     private String libname;
+    @Basic
+    @Column(name = "content")
+    private String content;
 
     public int getBookid() {
         return bookid;
@@ -128,6 +131,10 @@ public class BookEntity {
         this.libname = libname;
     }
 
+    public String getContent() { return content; }
+
+    public void setContent(String content) { this.content = content;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,6 +153,7 @@ public class BookEntity {
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (publisher != null ? !publisher.equals(that.publisher) : that.publisher != null) return false;
         if (libname != null ? !libname.equals(that.libname) : that.libname != null) return false;
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
 
         return true;
     }
@@ -163,6 +171,9 @@ public class BookEntity {
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
         result = 31 * result + (libname != null ? libname.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
     }
+
+
 }

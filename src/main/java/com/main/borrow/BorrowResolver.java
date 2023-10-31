@@ -32,10 +32,8 @@ public class BorrowResolver {
 
     @DgsMutation
     public TakeEntity borrow(@InputArgument Integer bookid,@InputArgument Integer readerid,@InputArgument Integer borrowtime) {
-
-                //获取当前时间
+        //获取当前时间
         Date date = new Date(System.currentTimeMillis());
-
         Calendar c = Calendar.getInstance();
         c.setTime(date);//使用给定的 Date设置此日历的时间
         c.add(Calendar.DATE,borrowtime);  //将当前日历时间添加指定日期

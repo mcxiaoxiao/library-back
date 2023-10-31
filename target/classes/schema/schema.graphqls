@@ -11,6 +11,7 @@ type BookEntity{
     price:Float
     publisher:String
     libname:String
+    content:String
 }
 
 
@@ -89,6 +90,7 @@ input BookEntityInput{
     price:Float
     publisher:String
     libname:String
+    content:String
 }
 
 
@@ -110,7 +112,7 @@ type Mutation {
 
     borrow(bookid:Int,readerid:Int,borrowtime:Int):TakeEntity!
     back(takeid:Int):TakeEntity!
-#    renew(takeid:Int,borrowtime:Int):TakeEntity!
+    renew(takeid:Int,borrowtime:Int):TakeEntity!
 }
 
 
