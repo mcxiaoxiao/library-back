@@ -31,6 +31,7 @@ type ReaderEntity{
     admin:String
     password:String
     role:Int
+    readertype:String
 }
 
 type TakeEntity{
@@ -40,6 +41,8 @@ type TakeEntity{
     borrowedtime:Int
     borrowedddl:String
     borroweddate:String
+    bookname:String
+    isreturned:Boolean
 }
 
 
