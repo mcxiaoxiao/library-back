@@ -1,6 +1,7 @@
 package com.main.book;
 
 import com.main.schema.BookEntity;
+import com.main.schema.FavoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +14,18 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
     @Resource
     private BookRepository bookRepository;
+    private FavoRepository favoRepository;
     private EntityManager entityManager;
-    public BookServiceImpl(BookRepository bookRepository)
+    public BookServiceImpl(BookRepository bookRepository,
+                           FavoRepository favoRepository
+    )
     {
+        this.favoRepository=favoRepository;
         this.bookRepository=bookRepository;
     }
+
+
+
     @Override
     public BookEntity addBook(BookEntity book) {
         return bookRepository.save(book);
@@ -43,4 +51,32 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
         return bookRepository.findAll(pageable);
     }
+
+
+
+    @Override
+    public FavoEntity addFavo(FavoEntity favo) {
+        return favoRepository.save(favo);
+    }
+    @Override
+    public FavoEntity deleteFavo(Integer id) {
+        FavoEntity favo=favoRepository.findById(id).orElse(null);
+        favoRepository.deleteById(id);
+        return favo;
+    }
+
+    @Override
+    public List<FavoEntity> findFavoAll() {
+        return favoRepository.findAll();
+    }
+    @Override
+    public Page<FavoEntity> findFavoPaginated(int pageNumber, int pageSize) {
+//        pageNumber = 1;
+//        pageSize = 10;
+        Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
+        return favoRepository.findAll(pageable);
+    }
+
+
+
 }

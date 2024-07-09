@@ -15,6 +15,22 @@ type BookEntity{
 }
 
 
+type FavoEntity{
+    bookid:Int
+    author:String
+    level:Int
+    type:String
+    borrowed:Boolean
+    isbn:String
+    libid:Int
+    name:String
+    price:Float
+    publisher:String
+    libname:String
+    content:String
+}
+
+
 type HistoryEntity{
     bookid:Int
     readerid:Int
@@ -25,6 +41,7 @@ type HistoryEntity{
 }
 
 type ReaderEntity{
+    userid:Int
     readername:String
     readersex:String
     email:String
@@ -51,6 +68,11 @@ type PagesHistoryEntity{
     totalCount:Int
 }
 
+type PagesFavoEntity{
+    list:[FavoEntity!]
+    totalCount:Int
+}
+
 type PagesBookEntity{
     list:[BookEntity!]
     totalCount:Int
@@ -58,6 +80,11 @@ type PagesBookEntity{
 
 type PagesTakeEntity{
     list:[TakeEntity]
+    totalCount:Int
+}
+
+type PagesReaderEntity{
+    list:[ReaderEntity]
     totalCount:Int
 }
 
@@ -69,6 +96,7 @@ type Date
 }
 
 input ReaderEntityInput{
+    userid:Int
     readername:String
     readersex:String
     readertype:String
@@ -77,9 +105,6 @@ input ReaderEntityInput{
     password:String
     role:Int
 }
-
-
-
 
 input BookEntityInput{
     bookid:Int
@@ -96,6 +121,20 @@ input BookEntityInput{
     content:String
 }
 
+input FavoEntityInput{
+    bookid:Int
+    author:String
+    level:Int
+    type:String
+    borrowed:Boolean
+    isbn:String
+    libid:Int
+    name:String
+    price:Float
+    publisher:String
+    libname:String
+    content:String
+}
 
 type Query {
     findBookById(id:Int):BookEntity!
@@ -105,17 +144,28 @@ type Query {
     findTakeAll(pageNumber:Int,pageSize:Int):PagesTakeEntity
 
     findReaderById(readerid:Int):ReaderEntity
+    findReaderAll(pageNumber:Int,pageSize:Int):PagesReaderEntity
+
     findHistoryAll(pageNumber:Int,pageSize:Int):PagesHistoryEntity!
+
+    findFavoAll(pageNumber:Int,pageSize:Int):PagesFavoEntity!
 }
 
 type Mutation {
     addBook(book:BookEntityInput):BookEntity!
-    addReader(reader:ReaderEntityInput):ReaderEntity!
     deleteBook(id:Int):BookEntity!
+
+    addFavo(favo:FavoEntityInput):FavoEntity!
+
+
+    deleteFavo(id:Int):FavoEntity!
 
     borrow(bookid:Int,readerid:Int,borrowtime:Int):TakeEntity!
     back(takeid:Int):TakeEntity!
     renew(takeid:Int,borrowtime:Int):TakeEntity!
+
+    addReader(reader:ReaderEntityInput):ReaderEntity!
+    deleteReader(readerid:Int):ReaderEntity!
 }
 
 

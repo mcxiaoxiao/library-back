@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface ReaderService {
-    Page<ReaderEntity> findReaderAll(int pageNumber, int pageSize);
-
+    List<ReaderEntity> findReaderAll();
+    ReaderEntity deleteReader(int readerid);
     ReaderEntity findReaderById(int readerid);
     ReaderEntity addReader(ReaderEntity reader);
 

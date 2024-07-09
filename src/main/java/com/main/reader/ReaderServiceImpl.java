@@ -22,12 +22,9 @@ public class ReaderServiceImpl implements ReaderService {
         this.readerRepository=readerRepository;
     }
     @Override
-    public Page<ReaderEntity> findReaderAll(int pageNumber, int pageSize)
-    {
-        Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
-        return readerRepository.findAll(pageable);
+    public List<ReaderEntity> findReaderAll() {
+        return readerRepository.findAll();
     }
-
     @Override
     public ReaderEntity findReaderById(int id) {
         return readerRepository.findById(id).orElse(null);
@@ -36,6 +33,13 @@ public class ReaderServiceImpl implements ReaderService {
     public ReaderEntity addReader(ReaderEntity reader)
     {
         return readerRepository.save(reader);
+    }
+
+    @Override
+    public ReaderEntity deleteReader(int readerid) {
+        ReaderEntity reader=readerRepository.findById(readerid).orElse(null);
+        readerRepository.deleteById(readerid);
+        return reader;
     }
 
 }

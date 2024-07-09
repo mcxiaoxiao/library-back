@@ -1,7 +1,9 @@
 package com.main.book;
 
 import com.main.schema.BookEntity;
+import com.main.schema.FavoEntity;
 import com.main.schema.PagesBookEntity;
+import com.main.schema.PagesFavoEntity;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
@@ -31,6 +33,28 @@ public class BookResolver {
     public BookEntity deleteBook(@InputArgument Integer id) {
         return bookService.deleteBook(id);
     }
+
+
+
+    @DgsQuery
+    public PagesFavoEntity findFavoAll(@InputArgument Integer pageNumber, @InputArgument Integer pageSize) {
+        PagesFavoEntity p = new PagesFavoEntity();
+        p.list = bookService.findFavoPaginated(pageNumber,pageSize).getContent();
+        p.totalCount = bookService.findFavoAll().size();
+        return p;
+    }
+
+    @DgsMutation
+    public FavoEntity addFavo(@InputArgument FavoEntity favo) {
+        return bookService.addFavo(favo);
+    }
+    @DgsMutation
+    public FavoEntity deleteFavo(@InputArgument Integer id) {
+        return bookService.deleteFavo(id);
+    }
+
+
+
 }
 
 
